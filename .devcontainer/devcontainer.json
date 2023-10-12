@@ -1,0 +1,154 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/typescript-node
+{
+  "name": "Node.js & TypeScript",
+  // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:1-20-bullseye",
+  "workspaceFolder": "/workspace",
+  // Features to add to the dev container. More info: https://containers.dev/features.
+  "features": {
+    "ghcr.io/devcontainers-contrib/features/zsh-plugins:0": {
+      "omzPlugins": "https://github.com/z-shell/F-Sy-H https://github.com/zsh-users/zsh-autosuggestions",
+      "plugins": "git F-Sy-H zsh-autosuggestions"
+    },
+    "ghcr.io/stuartleeks/dev-container-features/shell-history:0": {}
+  },
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  // "forwardPorts": [],
+  // Use 'postCreateCommand' to run commands after the container is created.
+  "postCreateCommand": {
+    "show versions": "printf \"Node.js: %s, pnpm: %s\" $(node -v) $(pnpm -v)",
+    "install global dependencies": "npm install --global @antfu/ni npkill npm pnpm taze"
+  },
+  "mounts": [
+    {
+      "source": "node-modules-cache-${devcontainerId}",
+      "target": "/workspace/node_modules",
+      "type": "volume"
+    },
+    {
+      "source": "pnpm-store-cache-${devcontainerId}",
+      "target": "/workspace/.pnpm-store",
+      "type": "volume"
+    }
+  ],
+  // Configure tool-specific properties.
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "eamodio.gitlens",
+        "IBM.output-colorizer",
+        "mhutchie.git-graph",
+        "mikestead.dotenv",
+        "ms-azuretools.vscode-docker",
+        "mutantdino.resourcemonitor",
+        "Orta.vscode-twoslash-queries",
+        "streetsidesoftware.code-spell-checker",
+        "usernamehw.errorlens",
+        "yoavbls.pretty-ts-errors",
+        "ZixuanChen.vitest-explorer"
+      ],
+      "settings": {
+        "editor.codeActionsOnSave": {
+          "source.fixAll": "explicit",
+          "source.organizeImports": "never"
+        },
+        "editor.detectIndentation": false,
+        "editor.rulers": [
+          {
+            "color": "#4f8f3117",
+            "column": 80
+          },
+          {
+            "color": "#a5551f40",
+            "column": 120
+          }
+        ],
+        "editor.formatOnSave": false,
+        "editor.tabSize": 2,
+        "editor.insertSpaces": true,
+        "editor.wordWrapColumn": 120,
+        "files.encoding": "utf8",
+        "files.eol": "\n",
+        "files.insertFinalNewline": true,
+        "files.trimTrailingWhitespace": true,
+        /* Error lens */
+        "errorLens.enabledDiagnosticLevels": [
+          "warning",
+          "error"
+        ],
+        "errorLens.excludeBySource": [
+          "cSpell",
+          "eslint"
+        ],
+        "errorLens.fontStyleItalic": true,
+        "errorLens.fontWeight": "100",
+        /* ESLint  */
+        "eslint.codeAction.showDocumentation": {
+          "enable": true
+        },
+        "eslint.experimental.useFlatConfig": true,
+        "eslint.quiet": true,
+        "eslint.rules.customizations": [
+          {
+            "rule": "style/*",
+            "severity": "off"
+          },
+          {
+            "rule": "*-indent",
+            "severity": "off"
+          },
+          {
+            "rule": "*-spacing",
+            "severity": "off"
+          },
+          {
+            "rule": "*-spaces",
+            "severity": "off"
+          },
+          {
+            "rule": "*-order",
+            "severity": "off"
+          },
+          {
+            "rule": "*-dangle",
+            "severity": "off"
+          },
+          {
+            "rule": "*-newline",
+            "severity": "off"
+          },
+          {
+            "rule": "*quotes",
+            "severity": "off"
+          },
+          {
+            "rule": "*semi",
+            "severity": "off"
+          }
+        ],
+        "eslint.validate": [
+          "html",
+          "javascript",
+          "javascriptreact",
+          "json",
+          "jsonc",
+          "markdown",
+          "typescript",
+          "typescriptreact",
+          "vue",
+          "yaml"
+        ],
+        /* Gitlens */
+        "gitlens.codeLens.authors.enabled": false,
+        "gitlens.codeLens.enabled": false,
+        "gitlens.codeLens.recentChange.enabled": false,
+        "gitlens.currentLine.enabled": false,
+        "gitlens.telemetry.enabled": false
+      }
+    }
+  }
+  // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+  // "remoteUser": "root"
+}

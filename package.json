@@ -1,0 +1,41 @@
+{
+  "name": "workspace",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@8.9.0",
+  "description": "Monorepo template for Node.js",
+  "author": "Nándor Dudás <nandor.dudas@gmaiol.com>",
+  "license": "MIT",
+  "scripts": {
+    "dedupe": "pnpm dedupe --check || pnpm dedupe",
+    "lint:fix": "pnpm run lint --fix",
+    "lint": "eslint --cache .",
+    "prepare": "simple-git-hooks",
+    "upgrade": "taze -I"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "1.0.0-beta.26",
+    "@antfu/ni": "^0.21.8",
+    "@commitlint/cli": "^17.7.2",
+    "@commitlint/config-conventional": "^17.7.0",
+    "@tsconfig/strictest": "^2.0.2",
+    "@types/node": "^20.8.4",
+    "eslint": "^8.51.0",
+    "lint-staged": "^14.0.1",
+    "pnpm": "^8.9.0",
+    "simple-git-hooks": "^2.9.0",
+    "taze": "^0.11.3",
+    "typescript": "^5.2.2"
+  },
+  "commitlint": {
+    "extends": "@commitlint/config-conventional"
+  },
+  "simple-git-hooks": {
+    "commit-msg": "npx --no -- commitlint --edit ${1}",
+    "pre-commit": "npx lint-staged"
+  },
+  "lint-staged": {
+    "*": "pnpm run lint:fix"
+  }
+}
