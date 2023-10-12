@@ -1,9 +1,11 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/typescript-node
+// Dev Container metadata reference https://containers.dev/implementors/json_reference/#image-specific
 {
   "name": "Node.js & TypeScript",
   // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
   "image": "mcr.microsoft.com/devcontainers/typescript-node:1-20-bullseye",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
   "workspaceFolder": "/workspace",
   // Features to add to the dev container. More info: https://containers.dev/features.
   "features": {
@@ -18,19 +20,13 @@
   // Use 'postCreateCommand' to run commands after the container is created.
   "postCreateCommand": {
     "show versions": "printf \"Node.js: %s, pnpm: %s\" $(node -v) $(pnpm -v)",
-    "install global dependencies": "npm install --global @antfu/ni npkill npm pnpm taze"
+    "install global dependencies": "npm install --global @antfu/ni czg npkill npm pnpm taze",
+    "install local dependencies": "pnpm install",
+    "setup folder privileges": "sudo chown --recursive node .pnpm-store node_modules"
   },
   "mounts": [
-    {
-      "source": "node-modules-cache-${devcontainerId}",
-      "target": "/workspace/node_modules",
-      "type": "volume"
-    },
-    {
-      "source": "pnpm-store-cache-${devcontainerId}",
-      "target": "/workspace/.pnpm-store",
-      "type": "volume"
-    }
+    { "source": "node-modules-cache-${devcontainerId}", "target": "/workspace/node_modules", "type": "volume" },
+    { "source": "pnpm-store-cache-${devcontainerId}", "target": "/workspace/.pnpm-store", "type": "volume" }
   ],
   // Configure tool-specific properties.
   "customizations": {
@@ -50,88 +46,71 @@
         "ZixuanChen.vitest-explorer"
       ],
       "settings": {
+        "diffEditor.experimental.showEmptyDecorations": true,
+        "diffEditor.experimental.showMoves": true,
+        "diffEditor.hideUnchangedRegions.enabled": true,
+        "diffEditor.ignoreTrimWhitespace": false,
+        /*  */
         "editor.codeActionsOnSave": {
           "source.fixAll": "explicit",
           "source.organizeImports": "never"
         },
         "editor.detectIndentation": false,
         "editor.rulers": [
-          {
-            "color": "#4f8f3117",
-            "column": 80
-          },
-          {
-            "color": "#a5551f40",
-            "column": 120
-          }
+          { "color": "#4f8f3117", "column": 80 },
+          { "color": "#a5551f17", "column": 120 }
         ],
         "editor.formatOnSave": false,
         "editor.tabSize": 2,
         "editor.insertSpaces": true,
         "editor.wordWrapColumn": 120,
+        /*  */
         "files.encoding": "utf8",
         "files.eol": "\n",
         "files.insertFinalNewline": true,
         "files.trimTrailingWhitespace": true,
+        /*  */
+        "git.allowForcePush": true,
+        "git.allowNoVerifyCommit": true,
+        "git.alwaysShowStagedChangesResourceGroup": true,
+        "git.autofetch": false,
+        "git.autoStash": true,
+        "git.branchProtection": ["main"],
+        "git.confirmForcePush": false,
+        "git.confirmNoVerifyCommit": false,
+        "git.confirmSync": false,
+        "git.enableCommitSigning": true,
+        "git.enableSmartCommit": true,
+        "git.fetchOnPull": true,
+        "git.followTagsWhenSync": true,
+        "git.pruneOnFetch": true,
+        "git.pullBeforeCheckout": true,
+        "git.untrackedChanges": "separate",
+        "scm.defaultViewMode": "tree",
+        "scm.diffDecorationsGutterWidth": 2,
         /* Error lens */
-        "errorLens.enabledDiagnosticLevels": [
-          "warning",
-          "error"
-        ],
-        "errorLens.excludeBySource": [
-          "cSpell",
-          "eslint"
-        ],
+        "errorLens.enabledDiagnosticLevels": ["error", "warning"],
+        "errorLens.excludeBySource": ["cSpell", "eslint"],
         "errorLens.fontStyleItalic": true,
         "errorLens.fontWeight": "100",
         /* ESLint  */
-        "eslint.codeAction.showDocumentation": {
-          "enable": true
-        },
+        "eslint.codeAction.showDocumentation": { "enable": true },
         "eslint.experimental.useFlatConfig": true,
         "eslint.quiet": true,
         "eslint.rules.customizations": [
-          {
-            "rule": "style/*",
-            "severity": "off"
-          },
-          {
-            "rule": "*-indent",
-            "severity": "off"
-          },
-          {
-            "rule": "*-spacing",
-            "severity": "off"
-          },
-          {
-            "rule": "*-spaces",
-            "severity": "off"
-          },
-          {
-            "rule": "*-order",
-            "severity": "off"
-          },
-          {
-            "rule": "*-dangle",
-            "severity": "off"
-          },
-          {
-            "rule": "*-newline",
-            "severity": "off"
-          },
-          {
-            "rule": "*quotes",
-            "severity": "off"
-          },
-          {
-            "rule": "*semi",
-            "severity": "off"
-          }
+          { "rule": "*-dangle", "severity": "off" },
+          { "rule": "*-indent", "severity": "off" },
+          { "rule": "*-newline", "severity": "off" },
+          { "rule": "*-order", "severity": "off" },
+          { "rule": "*-spaces", "severity": "off" },
+          { "rule": "*-spacing", "severity": "off" },
+          { "rule": "*quotes", "severity": "off" },
+          { "rule": "*semi", "severity": "off" },
+          { "rule": "style/*", "severity": "off" }
         ],
         "eslint.validate": [
           "html",
           "javascript",
-          "javascriptreact",
           "json",
           "jsonc",
           "markdown",
