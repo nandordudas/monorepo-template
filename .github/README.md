@@ -125,9 +125,9 @@ The followwing settings are just recommendations.
   ```
 </details>
 
-<!-- Use path related to root. -->
-[devcontainer.json]: ./.devcontainer/devcontainer.json
-[package.json]: ./package.json
+<!-- Use path related to .github folder -->
+[devcontainer.json]: ../.devcontainer/devcontainer.json
+[package.json]: ../package.json
 
 [Dev Containers]: https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers
 [dotfiles]: https://dotfiles.github.io/
