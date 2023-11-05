@@ -92,18 +92,7 @@
         "scm.defaultViewMode": "tree",
         "scm.diffDecorationsGutterWidth": 2,
         /* Typescript */
-        "typescript.experimental.aiCodeActions": {
-          "addNameToNamelessParameter": true,
-          "classDoesntImplementInheritedAbstractMember": true,
-          "classIncorrectlyImplementsInterface": true,
-          "extractConstant": true,
-          "extractFunction": true,
-          "extractInterface": true,
-          "extractType": true,
-          "inferAndAddTypes": true,
-          "missingFunctionDeclaration": true
-        },
-        /* The inlay hint settings can be very confusing for some.  */
+        /* The inlay hint settings can be very confusing for some. */
         // "typescript.inlayHints.enumMemberValues.enabled": true,
         // "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
         // "typescript.inlayHints.parameterNames.enabled": "all",
