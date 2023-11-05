@@ -7,13 +7,6 @@
 Welcome to the `Monorepo Template`, a project that serves as a starting point for building your own monorepository-based
 applications. This README provides essential information on how to set up and use this template effectively.
 
-## Table of Contents
-
-- [Requirements](#requirements)
-- [Getting Started](#getting-started)
-- [Devcontainer](#devcontainer)
-- [Recommended Git Configuration](#recommended-git-configuration)
-
 ## Requirements
 
 Before you begin, make sure you have the following prerequisites installed on your development environment:
