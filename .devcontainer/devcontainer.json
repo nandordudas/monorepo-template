@@ -17,12 +17,17 @@
   },
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   // "forwardPorts": [],
+  "onCreateCommand": {
+    "general update": "sudo apt update --yes && sudo apt upgrade --yes"
+  },
   // Use 'postCreateCommand' to run commands after the container is created.
   "postCreateCommand": {
-    "show versions": "printf \"Node.js: %s, pnpm: %s\" $(node -v) $(pnpm -v)",
-    "install global dependencies": "npm install --global @antfu/ni czg npkill npm pnpm taze",
-    "install local dependencies": "pnpm install",
-    "setup folder privileges": "sudo chown --recursive node .pnpm-store node_modules"
+    "show versions": "printf \"Node.js: %s, pnpm: %s\" $(node --version) $(pnpm --version)",
+    "setup folder privileges": "sudo chown --recursive node: .pnpm-store node_modules",
+    "install local dependencies": "pnpm install"
+  },
+  "postStartCommand": {
+    "install global dependencies": "npm install --global @antfu/ni czg npkill npm@latest pnpm@latest taze"
   },
   "mounts": [
     { "source": "node-modules-cache-${devcontainerId}", "target": "/workspace/node_modules", "type": "volume" },
@@ -51,10 +56,7 @@
         "diffEditor.hideUnchangedRegions.enabled": true,
         "diffEditor.ignoreTrimWhitespace": false,
         /*  */
-        "editor.codeActionsOnSave": {
-          "source.fixAll": "explicit",
-          "source.organizeImports": "never"
-        },
+        "editor.codeActionsOnSave": { "source.fixAll": "explicit", "source.organizeImports": "never" },
         "editor.detectIndentation": false,
         "editor.rulers": [
           { "color": "#4f8f3117", "column": 80 },
@@ -86,17 +88,38 @@
         "git.pruneOnFetch": true,
         "git.pullBeforeCheckout": true,
         "git.untrackedChanges": "separate",
+        /* Source control manager */
         "scm.defaultViewMode": "tree",
         "scm.diffDecorationsGutterWidth": 2,
+        /* Typescript */
+        "typescript.experimental.aiCodeActions": {
+          "addNameToNamelessParameter": true,
+          "classDoesntImplementInheritedAbstractMember": true,
+          "classIncorrectlyImplementsInterface": true,
+          "extractConstant": true,
+          "extractFunction": true,
+          "extractInterface": true,
+          "extractType": true,
+          "inferAndAddTypes": true,
+          "missingFunctionDeclaration": true
+        },
+        /* The inlay hint settings can be very confusing for some.  */
+        // "typescript.inlayHints.enumMemberValues.enabled": true,
+        // "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
+        // "typescript.inlayHints.parameterNames.enabled": "all",
+        // "typescript.inlayHints.parameterTypes.enabled": true,
+        // "typescript.inlayHints.variableTypes.enabled": true,
+        // "typescript.suggest.completeFunctionCalls": true,
+        "typescript.tsserver.log": "off",
+        // "typescript.tsserver.pluginPaths": ["typescript-plugin-css-modules"],
         /* Error lens */
         "errorLens.enabledDiagnosticLevels": ["error", "warning"],
-        "errorLens.excludeBySource": ["cSpell", "eslint"],
+        "errorLens.excludeBySource": ["cSpell"], // eslint, ts, etc.
         "errorLens.fontStyleItalic": true,
         "errorLens.fontWeight": "100",
         /* ESLint  */
         "eslint.codeAction.showDocumentation": { "enable": true },
         "eslint.experimental.useFlatConfig": true,
-        "eslint.quiet": true,
         "eslint.rules.customizations": [
           { "rule": "*-dangle", "severity": "off" },
           { "rule": "*-indent", "severity": "off" },
@@ -125,6 +148,7 @@
         "gitlens.codeLens.recentChange.enabled": false,
         "gitlens.currentLine.enabled": false,
         "gitlens.telemetry.enabled": false
+        /*  */
       }
     }
   }
