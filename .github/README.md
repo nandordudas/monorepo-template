@@ -38,6 +38,8 @@ Before you begin, make sure you have the following prerequisites installed on yo
   - Or use this template on your own GitHub profile.
 
 2. Replace `author` and `description` indide [package.json] file.
+3. Replace date and name inside [LICENSE] file.
+4. Replace `nandordudas` with your own GitHub username inside [CODEOWNERS] file.
 
 ## Devcontainer
 
@@ -70,7 +72,7 @@ The following settings are recommended:
   <summary>Git configuration</summary>
   <br>
 
-  Please replace your own data; name, email (and GPG key). Using [dotfiles] is much smarter approach.
+  Replace your own data; name, email (and GPG key). Using [dotfiles] is much smarter approach.
 
   ```bash
   # Important
@@ -113,18 +115,20 @@ The following settings are recommended:
   git config --global user.useConfigOnly true
 
   # GPG related configuration (optional)
+  # Don't forget to set your GPG key and enable it on GitHub as well in your profile settings
+  # and repository settings
 
   # If you have no GPG sign yet
   # gpg --quick-generate-key "John Doe <john.doe@email.com>" "ed25519/cert,sign+cv25519/encr"
   git config --global commit.gpgSign true
   git config --global tag.forceSignAnnotated true
   git config --global tag.gpgSign true
-  # List exisiting keys
+  # List existing keys
   # gpg --list-secret-keys --keyid-format long
   git config --global user.signingKey "0123456789ABCDEF"
 
-  # You can save your GPG keys indide a priveate repository and reuse them in the future
-  # Export exsiting keys
+  # You can save your GPG keys indide a private repository and reuse them in the future
+  # Export existing keys
   # gpg --export-secret-key --armor <signing_key> >secret.key
   # gpg --export --armor <signing_key> >public.key
   # Importing keys
@@ -135,13 +139,66 @@ The following settings are recommended:
   git config --list --show-origin
   ```
 
+  In summary, the recommended Git configuration is:
+
+  ```ini
+  [advice]
+    detachedHead = false
+  [branch]
+    autoSetupRebase = always
+  [commit]
+    gpgSign = true
+  [core]
+    abbrev = 12
+    autocrlf = input
+    editor = code --wait
+    fsmonitor = true
+    pager = delta
+    quotePath = false
+    untrackedCache = true
+    whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
+  [fetch]
+    prune = true
+    pruneTags = true
+    writeCommitGraph = true
+  [merge]
+    ff = only
+  [pull]
+    rebase = merges
+  [push]
+    autoSetupRemote = true
+    default = simple
+    followTags = true
+    useForceIfIncludes = true
+  [rebase]
+    abbreviateCommands = true
+    autoSquash = true
+    autoStash = true
+    updateRefs = true
+  [remote "origin"]
+    fetch = +refs/pull/*/head:refs/remotes/pull_requests/*
+  [tag]
+    forceSignAnnotated = true
+    gpgSign = true
+    sort = version:refname
+  [url "https://github.com/"]
+    insteadOf = gh:
+  [user]
+    email = john.doe@email.com ; Replace with your own email
+    name = John Doe ; Replace with your own name
+    signingKey = 0123456789ABCDEF ; Replace with your own GPG key
+    useConfigOnly = true
+  ```
+
   These configurations ensure a smooth Git workflow while accommodating personalization.
 </details>
 
 __Let's get started with your project!__
 
 <!-- Use path related to .github folder -->
+[CODEOWNERS]: ../.github/CODEOWNERS
 [devcontainer.json]: ../.devcontainer/devcontainer.json
+[LICENSE]: ../LICENSE
 [package.json]: ../package.json
 
 [Dev Containers]: https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers
