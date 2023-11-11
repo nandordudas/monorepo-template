@@ -17,18 +17,18 @@
     "upgrade": "taze minor -wIr"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^1.1.0",
-    "@antfu/ni": "^0.21.8",
-    "@commitlint/cli": "^17.8.1",
-    "@commitlint/config-conventional": "^17.8.1",
+    "@antfu/eslint-config": "^1.1.1",
+    "@antfu/ni": "^0.21.9",
+    "@commitlint/cli": "^18.4.0",
+    "@commitlint/config-conventional": "^18.4.0",
     "@total-typescript/ts-reset": "^0.5.1",
     "@tsconfig/strictest": "^2.0.2",
-    "@types/node": "^20.8.10",
+    "@types/node": "^20.9.0",
     "eslint": "^8.53.0",
-    "lint-staged": "^14.0.1",
+    "lint-staged": "^15.1.0",
     "pnpm": "^8.10.2",
     "simple-git-hooks": "^2.9.0",
-    "taze": "^0.11.4",
+    "taze": "^0.12.0",
     "typescript": "^5.2.2"
   },
   "commitlint": {
