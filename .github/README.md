@@ -141,7 +141,7 @@ The following settings are recommended:
 
   In summary, the recommended Git configuration is:
 
-  ```ini
+  ```properties
   [advice]
     detachedHead = false
   [branch]
@@ -175,8 +175,6 @@ The following settings are recommended:
     autoSquash = true
     autoStash = true
     updateRefs = true
-  [remote "origin"]
-    fetch = +refs/pull/*/head:refs/remotes/pull_requests/*
   [tag]
     forceSignAnnotated = true
     gpgSign = true
@@ -184,9 +182,9 @@ The following settings are recommended:
   [url "https://github.com/"]
     insteadOf = gh:
   [user]
-    email = john.doe@email.com ; Replace with your own email
-    name = John Doe ; Replace with your own name
-    signingKey = 0123456789ABCDEF ; Replace with your own GPG key
+    email = john.doe@email.com # Replace with your own email
+    name = John Doe # Replace with your own name
+    signingKey = 0123456789ABCDEF # Replace with your own GPG key
     useConfigOnly = true
   ```
 
